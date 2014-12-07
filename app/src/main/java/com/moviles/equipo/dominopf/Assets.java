@@ -36,4 +36,8 @@ public class Assets {
     public static Pixmap _61;
     public static Pixmap _62;
     public static Pixmap _66;
+    public static Pixmap background;
+    public static Pixmap botonjugar;
+
+    public static Sound click;
 }
