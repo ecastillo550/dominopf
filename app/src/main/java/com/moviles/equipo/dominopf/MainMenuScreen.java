@@ -23,17 +23,17 @@ public class MainMenuScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-                if (inBounds(event, 0, 0, 1280, 700)) {
+                if (inBounds(event, g.getWidth()/3, g.getHeight()/3-150, 425, 280)) {
                     //Settings.soundEnabled = !Settings.soundEnabled;
                     //if (Settings.soundEnabled)
                         Assets.click.play(1);
                 }
-//                if (inBounds(event, 64, 220, 192, 42)) {
-//                    game.setScreen(new GameScreen(game));
-//                    if (Settings.soundEnabled)
-//                        Assets.click.play(1);
-//                    return;
-//                }
+                if (inBounds(event, g.getWidth()/3, (g.getHeight()/3-150)+280, 380, 240)) {
+                    //game.setScreen(new GameScreen(game));
+                    if (Settings.soundEnabled)
+                        Assets.click.play(1);
+                    //return;
+                }
 
 //                if (inBounds(event, 64, 220 + 84, 192, 42)) {
 //                    game.setScreen(new HelpScreen(game));
@@ -56,9 +56,9 @@ public class MainMenuScreen extends Screen {
     @Override
     public void present(float deltaTime) {
         Graphics g = game.getGraphics();
-        //g.drawRect(0, g.getHeight() - 200, 200, 200, android.R.color.white);
         g.drawPixmap(Assets.background, 0, 0);
-        g.drawPixmap(Assets.botonjugar, 150, 150, 100, 100, 800, 400);
+        g.drawPixmap(Assets.botonjugar, g.getWidth()/3, (g.getHeight()/3) - 150);
+        g.drawPixmap(Assets.creditos, g.getWidth()/3, (g.getHeight()/3-150) + 280);
 //        if(Settings.soundEnabled)
 //            g.drawPixmap(Assets.buttons, 0, 416, 0, 0, 64, 64);
 //        else

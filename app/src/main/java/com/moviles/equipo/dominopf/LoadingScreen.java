@@ -19,6 +19,7 @@ public class LoadingScreen extends Screen {
         Graphics g = game.getGraphics();
         Assets.background = g.newPixmap("background.jpg", PixmapFormat.RGB565);
         Assets.botonjugar = g.newPixmap("botonjugar.jpg", PixmapFormat.ARGB4444);
+        Assets.creditos = g.newPixmap("creditos.jpg", PixmapFormat.ARGB4444);
         Assets._66 = g.newPixmap("_66.PNG", PixmapFormat.ARGB4444);
         Assets._00 = g.newPixmap("_00.PNG", PixmapFormat.ARGB4444);
         Assets._01 = g.newPixmap("_01.PNG", PixmapFormat.ARGB4444);
