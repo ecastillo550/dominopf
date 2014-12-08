@@ -30,6 +30,24 @@ public class Jugador {
         cantidadfichas = 7;
     }
 
+    public int getLugarMano(){
+        boolean flag = true;
+        int n = 0;
+
+        while(flag) {
+            if (n < 10) {
+                if (mano[n] == -1) {
+                    return n;
+                }
+                n++;
+            }
+            else {
+                flag = false;
+            }
+        }
+        return -1;
+    }
+
     public byte[] getMano(){
         return mano;
     }
@@ -37,6 +55,10 @@ public class Jugador {
     public boolean comer(byte deckPosicion){
         boolean flag = true;
         int n = 0;
+
+        if (deckPosicion > 28){
+            return false;
+        }
 
         while(flag) {
             if (n < 10) {

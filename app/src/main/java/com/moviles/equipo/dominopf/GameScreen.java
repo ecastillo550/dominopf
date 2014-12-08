@@ -73,6 +73,15 @@ public class GameScreen extends Screen {
                     if(Settings.soundEnabled)
                         Assets.click.play(1);
                 }
+
+                for(int n = 0; n < 10; n++){
+                    if (inBounds(event, n*100 , 600, 100, 100)) {
+                        tablero.ponerFicha(tablero.jugador, n);
+                        //if (!comidaexitosa){}
+                        if(Settings.soundEnabled)
+                            Assets.click.play(1);
+                    }
+                }
             }
         }
 

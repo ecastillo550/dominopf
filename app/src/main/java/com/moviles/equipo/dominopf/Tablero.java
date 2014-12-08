@@ -26,29 +26,22 @@ public class Tablero {
         //se etablece el lugar de las fichas
         for(int n = 0; n < 7; n++){
             deck.fichas[n].setPosicion(n,6);
+            deck.fichas[n].setRotacion(90);
         }
 
         oponente = new Jugador(2);
         turno = false;
-        num1 = 0;
-        num2 = 0;
+        num1 = -1;
+        num2 = -1;
         ponerFicha(oponente, 0);
     }
 
-    public void ponerFicha(Jugador player, int fichaEnMano){
+    public int ponerFicha(Jugador player, int fichaEnMano){
+        if(player.getMano()[fichaEnMano] == -1){
+            return 0;
+        }
         player.cantidadfichas--;
         deckEnJuego[posicionDeckEnJuego] = player.getMano()[fichaEnMano];
-
-        // si primera jugada
-        if(posicionDeckEnJuego == 0){
-            num1 = deck.fichas[deckEnJuego[posicionDeckEnJuego]].num1;
-            num2 = deck.fichas[deckEnJuego[posicionDeckEnJuego]].num2;
-            deck.fichas[deckEnJuego[posicionDeckEnJuego]].setPosicion(6,3);
-            x1 = x2 = 6;
-            y1 = y2 = 3;
-        }
-        posicionDeckEnJuego++;
-
 
         //si el numero 1 es igual al de la ficha
         if(num1 == deck.fichas[player.getMano()[fichaEnMano]].num1 || num1 == deck.fichas[player.getMano()[fichaEnMano]].num2){
@@ -62,6 +55,7 @@ public class Tablero {
                 num1 = deck.fichas[player.getMano()[fichaEnMano]].num2;
             } else{
                 num1 = deck.fichas[player.getMano()[fichaEnMano]].num1;
+                deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
             }
             if (deck.fichas[player.getMano()[fichaEnMano]].num1 == deck.fichas[player.getMano()[fichaEnMano]].num2){
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(90);
@@ -70,29 +64,43 @@ public class Tablero {
         }
 
         if(num2 == deck.fichas[player.getMano()[fichaEnMano]].num1 || num2 == deck.fichas[player.getMano()[fichaEnMano]].num2){
-            if (x1 >= 10){
-                y1 = 2;
+            if (x2 >= 10){
+                y2 = 2;
             } else {
-                x1++;
+                x2++;
             }
             if(deck.fichas[player.getMano()[fichaEnMano]].num2 == num2){
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
                 num2 = deck.fichas[player.getMano()[fichaEnMano]].num1;
             } else{
                 num2 = deck.fichas[player.getMano()[fichaEnMano]].num2;
+                deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
             }
             if (deck.fichas[player.getMano()[fichaEnMano]].num1 == deck.fichas[player.getMano()[fichaEnMano]].num2){
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(90);
             }
-            deck.fichas[player.getMano()[fichaEnMano]].setPosicion(x1, y1);
+            deck.fichas[player.getMano()[fichaEnMano]].setPosicion(x2, y2);
         }
 
+        // si primera jugada
+        if(posicionDeckEnJuego == 0){
+            num1 = deck.fichas[deckEnJuego[posicionDeckEnJuego]].num1;
+            num2 = deck.fichas[deckEnJuego[posicionDeckEnJuego]].num2;
+            deck.fichas[deckEnJuego[posicionDeckEnJuego]].setPosicion(6,3);
+            x1 = x2 = 6;
+            y1 = y2 = 3;
+        }
+        posicionDeckEnJuego++;
+
+        //Quitar ficha del jugador
+        player.getMano()[fichaEnMano] = -1;
 
         if( player == this.jugador){
             turno = false;
         } else {
             turno = true;
         }
+        return 0;
     }
 
     public byte getDeckPosicion(){
@@ -101,9 +109,10 @@ public class Tablero {
     }
 
     public boolean comeJugador(Jugador player){
-        if  (player.comer(deckPosicion)){
+        if  (player.getLugarMano() != -1){
             if( player == this.jugador){
-                deck.fichas[deckPosicion].setPosicion(player.cantidadfichas-1,6);
+                deck.fichas[deckPosicion].setPosicion(player.getLugarMano(),6);
+                player.comer(deckPosicion);
             }
             deckPosicion++;
             return true;
