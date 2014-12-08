@@ -64,7 +64,8 @@ public class Tablero {
         if (num2 != deck.fichas[player.getMano()[fichaEnMano]].num1 &&
                 num2 != deck.fichas[player.getMano()[fichaEnMano]].num2 &&
                 num1 != deck.fichas[player.getMano()[fichaEnMano]].num1 &&
-                num1 != deck.fichas[player.getMano()[fichaEnMano]].num2) {
+                num1 != deck.fichas[player.getMano()[fichaEnMano]].num2
+                && posicionDeckEnJuego != 0) {
             return -1;
         }
 
