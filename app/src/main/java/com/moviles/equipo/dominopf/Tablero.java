@@ -98,7 +98,12 @@ public class Tablero {
                 x1++;
                 trans1 = true;
             }
-            
+            if (x1 >= 10) {
+                direccion1 = 'i';
+                y1 = 5;
+                x1--;
+                trans1 = true;
+            }
             if (deck.fichas[player.getMano()[fichaEnMano]].num1 == num1) {
                 if (direccion1 == 'i') {
                     deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
@@ -138,6 +143,12 @@ public class Tablero {
                 direccion2 = 'i';
                 y2 = 2;
                 x2--;
+                trans2 = true;
+            }
+            if (x2 <= 1) {
+                direccion2 = 'd';
+                y2 = 1;
+                x2++;
                 trans2 = true;
             }
             if (deck.fichas[player.getMano()[fichaEnMano]].num2 == num2) {
@@ -194,7 +205,7 @@ public class Tablero {
     }
 
     public boolean comeJugador(Jugador player){
-        if  (player.getLugarMano() != -1){
+        if  (player.getLugarMano() != -1 && deckPosicion < 28){
             if( player == this.jugador){
                 deck.fichas[deckPosicion].setPosicion(player.getLugarMano(),6);
                 deck.fichas[deckPosicion].setRotacion(90);
@@ -209,7 +220,6 @@ public class Tablero {
         }
         else
             return false;
-
     }
 
 }
