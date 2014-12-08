@@ -119,24 +119,25 @@ public class GameScreen extends Screen {
 
     private void drawMano(Tablero tablero) {
         Graphics g = game.getGraphics();
-        int x = 0 * 100;
-        int y = 6 * 100;
 
-        for(int i = 0; i <= tablero.jugador.cantidadfichas ; i++) {
-            g.drawPixmap(Assets.getPieza(tablero.deck.fichas[tablero.jugador.getMano()[i]].nombreArchivo), x, y, 90);
-            x += 100;
+        for(int i = 0; i < 10 ; i++) {
+            if(tablero.jugador.getMano()[i] != -1)
+            g.drawPixmap(Assets.getPieza(tablero.deck.fichas[tablero.jugador.getMano()[i]].nombreArchivo),
+                    tablero.deck.fichas[tablero.jugador.getMano()[i]].getX()*100,
+                    tablero.deck.fichas[tablero.jugador.getMano()[i]].getY()*100,
+                    tablero.deck.fichas[tablero.jugador.getMano()[i]].getRotacion());
         }
 
     }
 
     private void drawTablero(Tablero tablero) {
         Graphics g = game.getGraphics();
-        int x = 6 * 100;
-        int y = 3 * 100;
 
-        for(int i = 0; i <= tablero.posicionDeckEnJuego-1 ; i++) {
-            g.drawPixmap(Assets.getPieza(tablero.deck.fichas[tablero.deckEnJuego[i]].nombreArchivo), x, y, 90);
-            x += 100;
+        for(int i = 0; i < tablero.posicionDeckEnJuego ; i++) {
+            g.drawPixmap(Assets.getPieza(tablero.deck.fichas[tablero.deckEnJuego[i]].nombreArchivo),
+                    tablero.deck.fichas[tablero.deckEnJuego[i]].getX()*100,
+                    tablero.deck.fichas[tablero.deckEnJuego[i]].getY()*100,
+                    tablero.deck.fichas[tablero.deckEnJuego[i]].getRotacion());
         }
 
     }
