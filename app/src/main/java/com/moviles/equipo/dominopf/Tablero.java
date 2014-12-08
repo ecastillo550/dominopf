@@ -45,11 +45,23 @@ public class Tablero {
 
     public int jugar(int fichaEnMano){
         ponerFicha(jugador, fichaEnMano);
-        int resp = oponente.getOpcion();
-        if (resp != -1){
-            ponerFicha(oponente, resp);
-        } else {
-            this.comeJugador(oponente);
+
+        boolean flag = true;
+        int resp = -1;
+        int n = 0;
+        while(flag){
+            if (n < 10) {
+                if (resp == -1) {
+                    resp = ponerFicha(oponente, n);
+
+                } else {
+                    flag = false;
+                }
+                n++;
+            } else {
+                flag = false;
+                this.comeJugador(oponente);
+            }
         }
         return 0;
     }
@@ -86,6 +98,7 @@ public class Tablero {
                 x1++;
                 trans1 = true;
             }
+            
             if (deck.fichas[player.getMano()[fichaEnMano]].num1 == num1) {
                 if (direccion1 == 'i') {
                     deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
@@ -184,10 +197,11 @@ public class Tablero {
         if  (player.getLugarMano() != -1){
             if( player == this.jugador){
                 deck.fichas[deckPosicion].setPosicion(player.getLugarMano(),6);
+                deck.fichas[deckPosicion].setRotacion(90);
                 player.comer(deckPosicion);
             }
             if( player == this.oponente){
-                deck.fichas[deckPosicion].setPosicion(player.getLugarMano(),0);
+                deck.fichas[deckPosicion].setPosicion(player.getLugarMano()+5,0);
                 player.comer(deckPosicion);
             }
             deckPosicion++;
