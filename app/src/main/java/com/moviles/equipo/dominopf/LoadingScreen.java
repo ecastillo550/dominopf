@@ -50,6 +50,7 @@ public class LoadingScreen extends Screen {
         Assets._26 = g.newPixmap("_26.png", PixmapFormat.ARGB4444);
         Assets._66 = g.newPixmap("_66.png", PixmapFormat.ARGB4444);
         Assets._back = g.newPixmap("_back.png", PixmapFormat.ARGB4444);
+        Assets.creditosback = g.newPixmap("creditosback.jpg", PixmapFormat.ARGB4444);
 
         Assets.click = game.getAudio().newSound("click.mp3");
         Settings.load(game.getFileIO());

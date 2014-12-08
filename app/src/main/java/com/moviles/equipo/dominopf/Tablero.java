@@ -5,6 +5,7 @@ package com.moviles.equipo.dominopf;
  */
 public class Tablero {
     public boolean gameOver = false;
+    public boolean ganaste = false;
     Deck deck = new Deck();
     public Jugador jugador;
     public Jugador oponente;
@@ -46,6 +47,10 @@ public class Tablero {
     public int jugar(int fichaEnMano){
         ponerFicha(jugador, fichaEnMano);
 
+        if(jugador.cantidadfichas <= 0){
+            ganaste = true;
+        }
+
         boolean flag = true;
         int resp = -1;
         int n = 0;
@@ -62,6 +67,37 @@ public class Tablero {
                 flag = false;
                 this.comeJugador(oponente);
             }
+        }
+        if(oponente.cantidadfichas <= 0){
+            gameOver = true;
+        }
+        return 0;
+    }
+
+    public int jugar(){
+        if(jugador.cantidadfichas <= 0){
+            ganaste = true;
+        }
+
+        boolean flag = true;
+        int resp = -1;
+        int n = 0;
+        while(flag){
+            if (n < 10) {
+                if (resp == -1) {
+                    resp = ponerFicha(oponente, n);
+
+                } else {
+                    flag = false;
+                }
+                n++;
+            } else {
+                flag = false;
+                this.comeJugador(oponente);
+            }
+        }
+        if(oponente.cantidadfichas <= 0){
+            gameOver = true;
         }
         return 0;
     }

@@ -89,11 +89,16 @@ public class GameScreen extends Screen {
                         Assets.click.play(1);
                     Assets.backgroundGame = g.newPixmap("_backback.png", Graphics.PixmapFormat.RGB565);
                 }
+                if(inBounds(event, 990 , 420, 230, 150)) {
+                    if(Settings.soundEnabled)
+                        Assets.click.play(1);
+                    tablero.jugar();
+                }
             }
         }
 
         //world.update(deltaTime);
-        if(tablero.gameOver) {
+        if(tablero.gameOver || tablero.ganaste) {
             if(Settings.soundEnabled)
                 Assets.click.play(1);
             state = GameState.GameOver;
@@ -110,8 +115,7 @@ public class GameScreen extends Screen {
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
-                if(event.x >= 128 && event.x <= 192 &&
-                        event.y >= 200 && event.y <= 264) {
+                if(event.x > 0 && event.y > 0) {
                     if(Settings.soundEnabled)
                         Assets.click.play(1);
                     game.setScreen(new MainMenuScreen(game));

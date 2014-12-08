@@ -32,14 +32,13 @@ public class MainMenuScreen extends Screen {
                     game.setScreen(new GameScreen(game));
                     if (Settings.soundEnabled)
                         Assets.click.play(1);
-
-                   // return;
+                    return;
                 }
                 if (inBounds(event, g.getWidth()/3, (g.getHeight()/3-150)+280, 380, 240)) {
-                    //game.setScreen(new GameScreen(game));
+                    game.setScreen(new CreditosScreen(game));
                     if (Settings.soundEnabled)
                         Assets.click.play(1);
-                    //return;
+                    return;
                 }
 
 //                if (inBounds(event, 64, 220 + 84, 192, 42)) {
