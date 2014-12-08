@@ -15,7 +15,7 @@ public class Assets {
     public static Pixmap _11;
     public static Pixmap _12;
     public static Pixmap _13;
-    public static Pixmap _15;
+    public static Pixmap _14;
     public static Pixmap _22;
     public static Pixmap _23;
     public static Pixmap _24;
@@ -39,6 +39,7 @@ public class Assets {
     public static Pixmap background;
     public static Pixmap botonjugar;
     public static Pixmap creditos;
+    public static Pixmap backgroundGame;
 
     public static Sound click;
 }
