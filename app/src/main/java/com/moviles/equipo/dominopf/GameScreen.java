@@ -25,11 +25,8 @@ public class GameScreen extends Screen {
         GameOver
     }
 
-
     GameState state = GameState.Running;
-    int oldScore = 0;
     Tablero tablero;
-    String score = "0";
 
     public GameScreen(Game game) {
         super(game);
@@ -71,11 +68,9 @@ public class GameScreen extends Screen {
                     return;
                 }
                 if (inBounds(event, 990 , 570, 230, 150)) {
-                    comidaexitosa = tablero.jugador.comer(tablero.deckPosicion);
-                    if (!comidaexitosa){
-
-                    }
-                    //if(Settings.soundEnabled)
+                    comidaexitosa = tablero.comeJugador(tablero.jugador);
+                    //if (!comidaexitosa){}
+                    if(Settings.soundEnabled)
                         Assets.click.play(1);
                 }
             }
@@ -117,32 +112,32 @@ public class GameScreen extends Screen {
 
         g.drawPixmap(Assets.backgroundGame, 0, 0);
         drawTablero(tablero);
+        drawMano(tablero);
         if(state == GameState.GameOver)
             drawGameOverUI();
     }
 
-    private void drawTablero(Tablero tablero) {
+    private void drawMano(Tablero tablero) {
         Graphics g = game.getGraphics();
         int x = 0 * 100;
         int y = 6 * 100;
 
-        for(int i = 0; i <= tablero.jugador.cantidadfichas-1 ; i++) {
+        for(int i = 0; i <= tablero.jugador.cantidadfichas ; i++) {
             g.drawPixmap(Assets.getPieza(tablero.deck.fichas[tablero.jugador.getMano()[i]].nombreArchivo), x, y, 90);
             x += 100;
         }
 
+    }
 
+    private void drawTablero(Tablero tablero) {
+        Graphics g = game.getGraphics();
+        int x = 6 * 100;
+        int y = 3 * 100;
 
-        //logica del dibujado tablero
-
-//        int len = snake.parts.size();
-//        for(int i = 1; i < len; i++) {
-//            SnakePart part = snake.parts.get(i);
-//            x = part.x * 32;
-//            y = part.y * 32;
-//            g.drawPixmap(Assets.tail, x, y);
-//        }
-
+        for(int i = 0; i <= tablero.posicionDeckEnJuego-1 ; i++) {
+            g.drawPixmap(Assets.getPieza(tablero.deck.fichas[tablero.deckEnJuego[i]].nombreArchivo), x, y, 90);
+            x += 100;
+        }
 
     }
 

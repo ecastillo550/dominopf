@@ -121,10 +121,12 @@ public class AndroidGraphics implements Graphics {
     //se agrego funcion para rotar imagenes
     @Override
     public void drawPixmap(Pixmap pixmap, int x, int y, float rotation) {
-        matrix.setRotate(rotation, pixmap.getWidth()/2, pixmap.getHeight()/2);
-        matrix.postTranslate(x, y);
+        if(pixmap != null) {
+            matrix.setRotate(rotation, pixmap.getWidth() / 2, pixmap.getHeight() / 2);
+            matrix.postTranslate(x, y);
 
-        canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, matrix ,null);
+            canvas.drawBitmap(((AndroidPixmap) pixmap).bitmap, matrix, null);
+        }
     }
     
     @Override
