@@ -42,6 +42,8 @@ public class Assets {
     volatile public static Pixmap creditos;
     volatile public static Pixmap backgroundGame;
     volatile public static Pixmap creditosback;
+    volatile public static Pixmap ganaste;
+    volatile public static Pixmap perdiste;
 
     volatile public static Sound click;
     public static Pixmap getPieza(String nombre) {

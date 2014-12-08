@@ -20,6 +20,7 @@ import com.moviles.equipo.framework.implement.AndroidGame;
 
 public class GameScreen extends Screen {
     Graphics g = game.getGraphics();
+    boolean flag = false;
     enum GameState {
         Running,
         Paused,
@@ -115,7 +116,7 @@ public class GameScreen extends Screen {
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
-                if(event.x > 0 && event.y > 0) {
+                if(event.x > 0 && event.y > 0 && flag) {
                     if(Settings.soundEnabled)
                         Assets.click.play(1);
                     game.setScreen(new MainMenuScreen(game));
@@ -131,10 +132,12 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawPixmap(Assets.backgroundGame, 0, 0);
-        drawTablero(tablero);
-        drawMano(tablero);
+        if (state == GameState.Running){
+            drawTablero(tablero);
+            drawMano(tablero);
+        }
         if(state == GameState.GameOver)
-            drawGameOverUI();
+            drawGameOverUI(tablero);
     }
 
     private  void drawMano(Tablero tablero) {
@@ -170,9 +173,15 @@ public class GameScreen extends Screen {
 
     }
 
-    private void drawGameOverUI() {
+    private void drawGameOverUI(Tablero tablero) {
         Graphics g = game.getGraphics();
-
+        if (tablero.gameOver){
+            g.drawPixmap(Assets.perdiste, 0, 0);
+        }
+        if (tablero.ganaste){
+            g.drawPixmap(Assets.ganaste, 0, 0);
+        }
+        flag = true;
     }
 
     @Override
