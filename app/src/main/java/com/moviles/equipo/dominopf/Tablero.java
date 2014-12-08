@@ -17,6 +17,8 @@ public class Tablero {
     int y1;
     int x2;
     int y2;
+    char direccion1 = 'i';
+    char direccion2 = 'd';
 
     //posicion del cursor del deck
     byte deckPosicion = 14;
@@ -29,6 +31,11 @@ public class Tablero {
             deck.fichas[n].setRotacion(90);
         }
 
+        for(int n = 7; n < 14; n++){
+            deck.fichas[n].setPosicion(n-5,0);
+            deck.fichas[n].setRotacion(0);
+        }
+
         oponente = new Jugador(2);
         turno = false;
         num1 = -1;
@@ -37,46 +44,78 @@ public class Tablero {
     }
 
     public int ponerFicha(Jugador player, int fichaEnMano){
+        boolean trans1 = false, trans2 = false;
         if(player.getMano()[fichaEnMano] == -1){
             return 0;
         }
         player.cantidadfichas--;
         deckEnJuego[posicionDeckEnJuego] = player.getMano()[fichaEnMano];
 
-        //si el numero 1 es igual al de la ficha
-        if(num1 == deck.fichas[player.getMano()[fichaEnMano]].num1 || num1 == deck.fichas[player.getMano()[fichaEnMano]].num2){
-            if (x1 <= 0){
-                y1 = 4;
-            } else {
+    //IZQUIERDAA
+        if (num1 == deck.fichas[player.getMano()[fichaEnMano]].num1 || num1 == deck.fichas[player.getMano()[fichaEnMano]].num2) {
+            if (direccion1 == 'i') {
                 x1--;
+            } else {
+                trans1 = false;
+                x1++;
             }
-            if(deck.fichas[player.getMano()[fichaEnMano]].num1 == num1){
+            if (x1 <= 0) {
+                direccion1 = 'd';
+                y1 = 4;
+                trans1 = true;
+            }
+            if (deck.fichas[player.getMano()[fichaEnMano]].num1 == num1) {
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
                 num1 = deck.fichas[player.getMano()[fichaEnMano]].num2;
-            } else{
+            } else {
                 num1 = deck.fichas[player.getMano()[fichaEnMano]].num1;
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
+                if(trans1){
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(270);
+                }
             }
-            if (deck.fichas[player.getMano()[fichaEnMano]].num1 == deck.fichas[player.getMano()[fichaEnMano]].num2){
+            if (deck.fichas[player.getMano()[fichaEnMano]].num1 == deck.fichas[player.getMano()[fichaEnMano]].num2) {
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(90);
             }
             deck.fichas[player.getMano()[fichaEnMano]].setPosicion(x1, y1);
         }
 
-        if(num2 == deck.fichas[player.getMano()[fichaEnMano]].num1 || num2 == deck.fichas[player.getMano()[fichaEnMano]].num2){
-            if (x2 >= 10){
-                y2 = 2;
-            } else {
+    //DERECHA
+        if (num2 == deck.fichas[player.getMano()[fichaEnMano]].num1 || num2 == deck.fichas[player.getMano()[fichaEnMano]].num2) {
+            if (direccion2 == 'd') {
                 x2++;
+            } else {
+                trans2 = false;
+                x2--;
             }
-            if(deck.fichas[player.getMano()[fichaEnMano]].num2 == num2){
-                deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
+            if (x2 >= 10) {
+                direccion2 = 'i';
+                y2 = 2;
+                x2--;
+                trans2 = true;
+            }
+            if (deck.fichas[player.getMano()[fichaEnMano]].num2 == num2) {
+                if (direccion2 == 'd'){
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
+                } else {
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
+                }
                 num2 = deck.fichas[player.getMano()[fichaEnMano]].num1;
-            } else{
+                if(trans2){
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(90);
+                }
+            } else {
+                if (direccion2 == 'd'){
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
+                } else {
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
+                }
                 num2 = deck.fichas[player.getMano()[fichaEnMano]].num2;
-                deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
+                if(trans2){
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(270);
+                }
             }
-            if (deck.fichas[player.getMano()[fichaEnMano]].num1 == deck.fichas[player.getMano()[fichaEnMano]].num2){
+            if (deck.fichas[player.getMano()[fichaEnMano]].num1 == deck.fichas[player.getMano()[fichaEnMano]].num2) {
                 deck.fichas[player.getMano()[fichaEnMano]].setRotacion(90);
             }
             deck.fichas[player.getMano()[fichaEnMano]].setPosicion(x2, y2);
@@ -112,6 +151,10 @@ public class Tablero {
         if  (player.getLugarMano() != -1){
             if( player == this.jugador){
                 deck.fichas[deckPosicion].setPosicion(player.getLugarMano(),6);
+                player.comer(deckPosicion);
+            }
+            if( player == this.oponente){
+                deck.fichas[deckPosicion].setPosicion(player.getLugarMano(),0);
                 player.comer(deckPosicion);
             }
             deckPosicion++;

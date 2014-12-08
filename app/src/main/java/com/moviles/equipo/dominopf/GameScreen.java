@@ -19,6 +19,7 @@ import com.moviles.equipo.framework.Screen;
 import com.moviles.equipo.framework.implement.AndroidGame;
 
 public class GameScreen extends Screen {
+    Graphics g = game.getGraphics();
     enum GameState {
         Running,
         Paused,
@@ -82,6 +83,12 @@ public class GameScreen extends Screen {
                             Assets.click.play(1);
                     }
                 }
+
+                if(event.x > 500 && event.y < 100) {
+                    if(Settings.soundEnabled)
+                        Assets.click.play(1);
+                    Assets.backgroundGame = g.newPixmap("_backback.png", Graphics.PixmapFormat.RGB565);
+                }
             }
         }
 
@@ -126,7 +133,7 @@ public class GameScreen extends Screen {
             drawGameOverUI();
     }
 
-    private void drawMano(Tablero tablero) {
+    private  void drawMano(Tablero tablero) {
         Graphics g = game.getGraphics();
 
         for(int i = 0; i < 10 ; i++) {
@@ -135,6 +142,14 @@ public class GameScreen extends Screen {
                     tablero.deck.fichas[tablero.jugador.getMano()[i]].getX()*100,
                     tablero.deck.fichas[tablero.jugador.getMano()[i]].getY()*100,
                     tablero.deck.fichas[tablero.jugador.getMano()[i]].getRotacion());
+        }
+
+        for(int i = 0; i < 10 ; i++) {
+            if(tablero.oponente.getMano()[i] != -1)
+                g.drawPixmap(Assets.getPieza("_back"),
+                        tablero.deck.fichas[tablero.oponente.getMano()[i]].getX()*100,
+                        tablero.deck.fichas[tablero.oponente.getMano()[i]].getY()*100,
+                        tablero.deck.fichas[tablero.oponente.getMano()[i]].getRotacion());
         }
 
     }

@@ -8,40 +8,41 @@ import com.moviles.equipo.framework.Pixmap;
 import com.moviles.equipo.framework.Sound;
 
 public class Assets {
-    public static Pixmap _00;
-    public static Pixmap _01;
-    public static Pixmap _02;
-    public static Pixmap _03;
-    public static Pixmap _11;
-    public static Pixmap _12;
-    public static Pixmap _13;
-    public static Pixmap _14;
-    public static Pixmap _22;
-    public static Pixmap _23;
-    public static Pixmap _24;
-    public static Pixmap _25;
-    public static Pixmap _33;
-    public static Pixmap _34;
-    public static Pixmap _35;
-    public static Pixmap _36;
-    public static Pixmap _04;
-    public static Pixmap _44;
-    public static Pixmap _45;
-    public static Pixmap _46;
-    public static Pixmap _05;
-    public static Pixmap _15;
-    public static Pixmap _55;
-    public static Pixmap _56;
-    public static Pixmap _06;
-    public static Pixmap _16;
-    public static Pixmap _26;
-    public static Pixmap _66;
-    public static Pixmap background;
-    public static Pixmap botonjugar;
-    public static Pixmap creditos;
-    public static Pixmap backgroundGame;
+    volatile public static Pixmap _00;
+    volatile public static Pixmap _01;
+    volatile public static Pixmap _02;
+    volatile public static Pixmap _03;
+    volatile public static Pixmap _11;
+    volatile public static Pixmap _12;
+    volatile public static Pixmap _13;
+    volatile public static Pixmap _14;
+    volatile public static Pixmap _22;
+    volatile public static Pixmap _23;
+    volatile public static Pixmap _24;
+    volatile public static Pixmap _25;
+    volatile public static Pixmap _33;
+    volatile public static Pixmap _34;
+    volatile public static Pixmap _35;
+    volatile public static Pixmap _36;
+    volatile public static Pixmap _04;
+    volatile public static Pixmap _44;
+    volatile public static Pixmap _45;
+    volatile public static Pixmap _46;
+    volatile public static Pixmap _05;
+    volatile public static Pixmap _15;
+    volatile public static Pixmap _55;
+    volatile public static Pixmap _56;
+    volatile public static Pixmap _06;
+    volatile public static Pixmap _16;
+    volatile public static Pixmap _26;
+    volatile public static Pixmap _66;
+    volatile public static Pixmap _back;
+    volatile public static Pixmap background;
+    volatile public static Pixmap botonjugar;
+    volatile public static Pixmap creditos;
+    volatile public static Pixmap backgroundGame;
 
-    public static Sound click;
+    volatile public static Sound click;
     public static Pixmap getPieza(String nombre) {
         if (nombre.equals("_00")) {
             return _00;
@@ -127,7 +128,10 @@ public class Assets {
         if (nombre.equals("_66")) {
             return _66;
         }
-        return null;
+        if (nombre.equals("_back")) {
+            return _back;
+        }
+        return _back;
     }
 
 }
