@@ -40,7 +40,7 @@ public class Deck {
 
         //inicializacion de las fichas
         for(byte n = 0; n<28; n++){
-            fichas[deck[n]] = new Ficha(num1,num2);
+            fichas[deck[n]] = new Ficha(num1,num2, "_"+num1+num2);
             if (num2 >= 6 ){
                 num2 = num1;
                 num1++;

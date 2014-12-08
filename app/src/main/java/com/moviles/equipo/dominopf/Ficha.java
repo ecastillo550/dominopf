@@ -6,11 +6,13 @@ package com.moviles.equipo.dominopf;
 public class Ficha {
     int num1;
     int num2;
+    String nombreArchivo;
     float rotacion;
 
-    public Ficha(int num1, int num2){
+    public Ficha(int num1, int num2, String nombreArchivo){
         this.num1 = num1;
         this.num2 = num2;
+        this.nombreArchivo = nombreArchivo;
     }
 
     public void setRotacion(float rotacion){
