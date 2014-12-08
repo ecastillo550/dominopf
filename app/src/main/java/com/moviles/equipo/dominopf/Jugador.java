@@ -52,6 +52,23 @@ public class Jugador {
         return mano;
     }
 
+    public int getOpcion(){
+        boolean flag = true;
+        int n = 0;
+        while(flag){
+            if(n < 10) {
+                if (mano[n] != -1) {
+                    return n;
+                } else {
+                    n++;
+                }
+            } else {
+                flag = false;
+            }
+        }
+        return -1;
+    }
+
     public boolean comer(byte deckPosicion){
         boolean flag = true;
         int n = 0;

@@ -43,11 +43,31 @@ public class Tablero {
         ponerFicha(oponente, 0);
     }
 
+    public int jugar(int fichaEnMano){
+        ponerFicha(jugador, fichaEnMano);
+        int resp = oponente.getOpcion();
+        if (resp != -1){
+            ponerFicha(oponente, resp);
+        } else {
+            this.comeJugador(oponente);
+        }
+        return 0;
+    }
+
     public int ponerFicha(Jugador player, int fichaEnMano){
         boolean trans1 = false, trans2 = false;
+
+        //validaciones para saber si vale la pena lo demas
         if(player.getMano()[fichaEnMano] == -1){
-            return 0;
+            return -1;
         }
+        if (num2 != deck.fichas[player.getMano()[fichaEnMano]].num1 &&
+                num2 != deck.fichas[player.getMano()[fichaEnMano]].num2 &&
+                num1 != deck.fichas[player.getMano()[fichaEnMano]].num1 &&
+                num1 != deck.fichas[player.getMano()[fichaEnMano]].num2) {
+            return -1;
+        }
+
         player.cantidadfichas--;
         deckEnJuego[posicionDeckEnJuego] = player.getMano()[fichaEnMano];
 
@@ -59,17 +79,29 @@ public class Tablero {
                 trans1 = false;
                 x1++;
             }
-            if (x1 <= 0) {
+            if (x1 <= 1) {
                 direccion1 = 'd';
                 y1 = 4;
+                x1++;
                 trans1 = true;
             }
             if (deck.fichas[player.getMano()[fichaEnMano]].num1 == num1) {
-                deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
+                if (direccion1 == 'i') {
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
+                } else {
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
+                }
+                if(trans1){
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(90);
+                }
                 num1 = deck.fichas[player.getMano()[fichaEnMano]].num2;
             } else {
+                if (direccion1 == 'i') {
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
+                } else {
+                    deck.fichas[player.getMano()[fichaEnMano]].setRotacion(180);
+                }
                 num1 = deck.fichas[player.getMano()[fichaEnMano]].num1;
-                deck.fichas[player.getMano()[fichaEnMano]].setRotacion(0);
                 if(trans1){
                     deck.fichas[player.getMano()[fichaEnMano]].setRotacion(270);
                 }
