@@ -3,6 +3,8 @@ package com.moviles.equipo.dominopf;
 /**
  * Created by ecast_000 on 07-Dec-14.
  */
+import android.widget.Toast;
+
 import java.util.List;
 import com.moviles.equipo.framework.Game;
 import com.moviles.equipo.framework.Graphics;
@@ -20,6 +22,7 @@ public class MainMenuScreen extends Screen {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();
         int len = touchEvents.size();
+
 
 
         for (int i = 0; i < len; i++) {

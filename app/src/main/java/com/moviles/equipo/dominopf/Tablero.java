@@ -16,6 +16,9 @@ public class Tablero {
         oponente = new Jugador(2);
     }
 
-
+    public byte getDeckPosicion(){
+        deckPosicion++;
+        return (byte) (deckPosicion-1);
+    }
 
 }
